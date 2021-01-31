@@ -2,345 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
-public class Condition
-{
-    public static string[] objectAndPlotTags = new string[] {   "itemreq", "contriband",
-                                                                "plotreq", "excludedplot",
-                                                                "itemgiven", "itemtaken",
-                                                                "plotgiven", "plottaken",
-                                                                "mood", "place"};
-
-    public static string[] skillAndResourceTags = new string[] {    "musclecheck", "charmcheck", "witscheck", "assetscheck", "craftcheck",
-                                                                    "musclemod", "charmmod", "witsmod", "assetsmod", "craftmod",
-                                                                    "healthcheck", "fortitudecheck", "spiritcheck",
-                                                                    "healthmod", "fortitudemod", "spiritmod"};
-
-    public int startTime, endTime;
-
-    public Dictionary<string, List<string>> objectAndPlotValues;
-
-    public Dictionary<string, int> skillAndResourceValues;
-
-    public Condition()
-    {
-        objectAndPlotValues = new Dictionary<string, List<string>>();
-        skillAndResourceValues = new Dictionary<string, int>();
-        startTime = -1;
-        endTime = -1;
-    }
-}
-
-public class DialogueNode
-{
-    public enum DialogueType
-    {
-        Dialogue,   //Normal dialogue
-        Choice,     //Choice
-        Failure,    //Failure dialogue
-        Success,    //Success dialogue
-        Root
-    };
-
-    private DialogueType type_;
-
-    public string Owner { get; set; }//Name of the person or object delivering the dialogue
-
-    public string Dialogue { get; set; }
-
-    public DialogueNode parent;
-
-    public DialogueType Type { get { return type_; } }
-
-    public List<DialogueNode> children;
-
-    public Condition condition;
-
-    public DialogueNode(DialogueType t)
-    {
-        type_ = t;
-        children = new List<DialogueNode>();
-        parent = null;
-    }
-
-    public void AddNode(DialogueNode node)
-    {
-        children.Add(node);
-    }
-
-    public DialogueNode GetChild(uint index)
-    {
-        if(index < children.Count)
-        {
-            return children[(int)index];
-        }
-        return null;
-    }
-}
+using UnityEngine.UI;
 
 
-public class DialogueModel
-{
-    public static DialogueModel DialogueData { get; private set; }
-
-    public static bool isInitialized { get; private set; }
-
-    public Dictionary<string, DialogueNode> dialogue;
-
-    public static bool Initialize(string dialogueFileLocation)
-    {
-        if (!isInitialized)
-        {
-            DialogueData = new DialogueModel();
-            isInitialized = DialogueData.initialize(dialogueFileLocation);
-        }
-        return isInitialized;
-    }
-
-    private void ParseDialogueFile(string dialogueFileLocation)
-    {
-        string rawDialogue = System.IO.File.ReadAllText(dialogueFileLocation);
-        Stack<DialogueNode> nodes = new Stack<DialogueNode>();
-        int index = rawDialogue.IndexOf('<');
-        DialogueNode curNode;
-
-        while (index != -1)
-        {
-            curNode = ParseNode(ref index, ref rawDialogue, ref nodes);
-            index = rawDialogue.IndexOf('<', index);
-            if(curNode != null)
-            {
-                dialogue.Add(curNode.Owner, curNode);
-            }
-        }
-    }
-
-    private string getQuotedContent(in string str, int index)
-    {
-        int start, end;
-        start = str.IndexOf('\"', index);
-        if(start != -1)
-        {
-            end = str.IndexOf('\"', start + 1);
-            while(end != -1 && str[end] == '\\')
-            {
-                end = str.IndexOf('\"', end + 1);
-            }
-            if(end != -1)
-            {
-                return str.Substring(start + 1, end - start - 1);
-            }
-        }
-        return null;
-    }
-
-    private void ParseParams(ref Condition condition, in string parameters)
-    {
-        int index = 0;
-
-        foreach(string tag in Condition.objectAndPlotTags)
-        {
-            index = parameters.IndexOf(tag + "=\"", System.StringComparison.OrdinalIgnoreCase);
-            if (index != -1)
-            {
-                condition.objectAndPlotValues[tag] = new List<string>(getQuotedContent(parameters, index).Split(','));
-            }
-        }
-
-        foreach (string tag in Condition.skillAndResourceTags)
-        {
-            index = parameters.IndexOf(tag + "=\"", System.StringComparison.OrdinalIgnoreCase);
-            if (index != -1)
-            {
-                int val = 0;
-                if (int.TryParse(getQuotedContent(parameters, index), out val))
-                {
-                    condition.skillAndResourceValues[tag] = val;
-                }
-            }
-        }
-    }
-
-    private DialogueNode ParseTag(in string tag)
-    {
-        int index = tag.IndexOf(' ');
-        if(index == -1)
-        {
-            index = tag.Length;
-        }
-
-        int start, end;
-        string part = tag.Substring(0, index).ToLower();
-        DialogueNode.DialogueType type;
-
-        //Determine dialoge type
-        if (part.Equals("d"))    //Dialogue
-        {
-            type = DialogueNode.DialogueType.Dialogue;
-        }
-        else if (part.Equals("c"))   //Choice
-        {
-            type = DialogueNode.DialogueType.Choice;
-        }
-        else if (part.Equals("f"))   //Failure
-        {
-            type = DialogueNode.DialogueType.Failure;
-        }
-        else if (part.Equals("s"))   //Success
-        {
-            type = DialogueNode.DialogueType.Success;
-        }
-        else if (part.Equals("r"))   //Root
-        {
-            type = DialogueNode.DialogueType.Root;
-        }
-        else //Undefined or closing
-        {
-            return null;
-        }
-
-        Condition condition = new Condition();
-        string owner = null;
-
-        start = tag.IndexOf("owner", System.StringComparison.OrdinalIgnoreCase);
-        if(start != -1)
-        {
-            start = tag.IndexOf("=\"", start);
-            if(start != -1)
-            {
-                end = tag.IndexOf("\"", start + 2);
-                while(end != -1 && tag[end -1] == '\\')
-                {
-                    end = tag.IndexOf("\"", end + 1);
-                }
-
-                if(end != -1)
-                {
-                    owner = tag.Substring(start + 2, end - start - 2);
-                    index = end + 1;
-                }
-            }
-        }
-        else
-        {
-            owner = "";
-        }
-
-        DialogueNode node = new DialogueNode(type);
-        node.Owner = owner;
-
-        ParseParams(ref condition, in tag);
-
-        node.condition = condition;
-
-        start = tag.IndexOf("dialogue", System.StringComparison.OrdinalIgnoreCase);
-        if (start != -1)
-        {
-            start = tag.IndexOf("=\"", start);
-            if (start != -1)
-            {
-                end = tag.IndexOf("\"", start + 2);
-                while (end != -1 && tag[end - 1] == '\\')
-                {
-                    end = tag.IndexOf("\"", end + 1);
-                }
-
-                if (end != -1)
-                {
-                    node.Dialogue = tag.Substring(start + 2, end - start - 2);
-                    index = end + 1;
-                }
-            }
-        }
-
-        return node;
-    }
-
-    private DialogueNode ParseNode(ref int index, ref string rawDialogue, ref Stack<DialogueNode> nodes)
-    {
-        int tagStart = rawDialogue.IndexOf('<', index);
-        int tagEnd = rawDialogue.IndexOf('>', index);
-        index = tagEnd;
-
-        if (tagStart != -1 && tagEnd != -1)
-        {
-            index = tagEnd + 1;
-            string tag = rawDialogue.Substring(tagStart + 1, tagEnd - tagStart - 1).Trim();
-            if (tag.Length != 0)
-            {
-                DialogueNode node = ParseTag(in tag);
-                if (node == null)
-                {
-                    nodes.Pop();    //close node
-                    return null;
-                }
-                else
-                {
-                    if (nodes.Count > 0)
-                    {
-                        nodes.Peek().AddNode(node);
-                        node.parent = nodes.Peek();
-                    }
-                    nodes.Push(node);
-                    while (ParseNode(ref index, ref rawDialogue, ref nodes) != null) ;
-                    return node;
-                }
-            }
-            else
-            {
-                return null;
-            }
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-
-    private DialogueModel()
-    {
-        
-    }
-
-    private bool initialize(string dialogueFileLocation)
-    {
-        dialogue = new Dictionary<string, DialogueNode>();
-
-        if (System.IO.File.Exists(dialogueFileLocation))    //Load dialogue
-        {
-            ParseDialogueFile(dialogueFileLocation);
-            return true;
-        }
-        else
-        {
-            Debug.LogError("ERROR: Dialogue File Not Found");
-            return false;
-        }
-    }
-}
-
+//Manages dialogue data and display
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager manager;
+
     public string currentSpeaker;
     public DialogueNode currentNode;
 
-    public GameObject dialogueBox, speakerTag, speakerImage, canvas;
-    public string dialogueFileLocation;
+    public GameObject dialogueBox, speakerTag, speakerImage, dialoguePanel;
     private int currentChoice;
 
     private int currentDialoguePosition = 0;
     private bool dialogueEndReached = false;
-
-    void Start()
-    {
-        DialogueModel.Initialize(dialogueFileLocation);
-        if(!DialogueModel.isInitialized)
-        {
-            Debug.LogError("ERROR: Failed to initialize dialogue");
-        }
-        gameObject.SetActive(false);
-    }
 
     //Activates dialogue UI and begins dialogue conversation.
     public void OpenDialogue(string name)
@@ -356,29 +33,74 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            Debug.LogWarning("Warning unable to find dialogue.");
             speakerTag.GetComponent<TextMeshProUGUI>().text = "??????";
             dialogueBox.GetComponent<TextMeshProUGUI>().text = "";
         }
 
-        canvas.SetActive(true);
+        dialoguePanel.SetActive(true);
     }
 
+    //TODO check if dialogue is already closing or opening and block close and open calls while animating.
     public void CloseDialogue()
     {
-        canvas.SetActive(false);
+        dialoguePanel.SetActive(false);
     }
 
     //TODO
     bool CheckCondition(Condition condition)
     {
-        
+        if(condition.objectAndPlotValues.ContainsKey("itemreq") && condition.objectAndPlotValues["itemreq"].Count > 0)
+        {
+            foreach(var c in condition.objectAndPlotValues["itemreq"])
+            {
+                if (!CharacterData.Data.ContainsItem(c))
+                {
+                    return false;
+                }
+            }
+        }
+
+        if(condition.objectAndPlotValues.ContainsKey("contriband") && condition.objectAndPlotValues["contriband"].Count > 0)
+        {
+            foreach(var c in condition.objectAndPlotValues["contriband"])
+            {
+                if(CharacterData.Data.ContainsItem(c))
+                {
+                    return false;
+                }
+            }
+        }
+
+        if (condition.objectAndPlotValues.ContainsKey("plotreq") && condition.objectAndPlotValues["plotreq"].Count > 0)
+        {
+            foreach (var c in condition.objectAndPlotValues["plotreq"])
+            {
+                if (!CharacterData.Data.ContainsItem(c))
+                {
+                    return false;
+                }
+            }
+        }
+
+        if (condition.objectAndPlotValues.ContainsKey("excludedplot") && condition.objectAndPlotValues["excludedplot"].Count > 0)
+        {
+            foreach (var c in condition.objectAndPlotValues["excludedplot"])
+            {
+                if (CharacterData.Data.ContainsItem(c))
+                {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 
     bool RollSkillChecks(Condition condition)
     {
         int rollValue = Random.Range(1, 12);
-        if (rollValue < 7)
+        if (rollValue < 6)
         {
             return false;
         }
@@ -415,6 +137,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if(node.Type == type && CheckCondition(node.condition))
                     {
+                        HandleDialogueItemChanges(node);
                         return node;
                     }
                 }
@@ -456,7 +179,47 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
+        HandleDialogueItemChanges(nextNode);
+
         return nextNode;
+    }
+
+    void HandleDialogueItemChanges(DialogueNode node)
+    {
+        if(node != null)
+        {
+            if(node.condition.objectAndPlotValues.ContainsKey("itemgiven"))
+            {
+                foreach(var item in node.condition.objectAndPlotValues["itemgiven"])
+                {
+                    CharacterData.Data.AddItem(item);
+                }
+            }
+
+            if (node.condition.objectAndPlotValues.ContainsKey("itemtaken"))
+            {
+                foreach (var item in node.condition.objectAndPlotValues["itemtaken"])
+                {
+                    CharacterData.Data.RemoveItem(item);
+                }
+            }
+
+            if (node.condition.objectAndPlotValues.ContainsKey("plotgiven"))
+            {
+                foreach (var item in node.condition.objectAndPlotValues["plotgiven"])
+                {
+                    CharacterData.Data.AddItem(item);
+                }
+            }
+
+            if (node.condition.objectAndPlotValues.ContainsKey("plottaken"))
+            {
+                foreach (var item in node.condition.objectAndPlotValues["plottaken"])
+                {
+                    CharacterData.Data.RemoveItem(item);
+                }
+            }
+        }
     }
 
     void DisplayChoices()
@@ -465,14 +228,30 @@ public class DialogueManager : MonoBehaviour
         display.text = "";
         for(int i = 0; i < currentNode.parent.children.Count; i++)
         {
+            string prefix = "", suffix = "\n";
             if (i == currentChoice)
             {
-                display.text += "<b><color=\"yellow\">" + currentNode.parent.GetChild((uint)i).Dialogue + "</color></b>\n";
+                prefix += "<b>>";
+                suffix = "</b>" + suffix;
             }
-            else
+
+            if(!CheckCondition(currentNode.parent.GetChild((uint)i).condition))
             {
-                display.text += currentNode.parent.GetChild((uint)i).Dialogue + "\n";
+                prefix += "<color=#777777>";
+                suffix = "</color>" + suffix;
             }
+           
+            display.text += prefix + currentNode.parent.GetChild((uint)i).Dialogue + suffix;
+        }
+    }
+
+    //TODO access data
+    void SetPortrait(string owner, string mood)
+    {
+        var texture = GameResourceManager.ResourceManager.GetNPCPortrait(owner, mood);
+        if (texture != null)
+        {
+            speakerImage.GetComponent<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
         }
     }
 
@@ -487,7 +266,7 @@ public class DialogueManager : MonoBehaviour
         else if(nextNode != currentNode)    //If node changes, adjust text
         {
             currentNode = nextNode;
-            speakerTag.GetComponent<TextMeshProUGUI>().text = currentNode.Owner;
+            speakerTag.GetComponent<TextMeshProUGUI>().text = currentNode.DisplayName;
             
             if (currentNode.Type == DialogueNode.DialogueType.Choice)
             {
@@ -503,6 +282,12 @@ public class DialogueManager : MonoBehaviour
                 currentDialoguePosition = 0;
                 dialogueEndReached = false;
             }
+            string mood = null;
+            if(currentNode.condition.objectAndPlotValues.ContainsKey("mood"))
+            {
+                mood = currentNode.condition.objectAndPlotValues["mood"][0];
+            }
+            SetPortrait(currentNode.Owner, mood);
         }
 
         return true;
@@ -535,6 +320,15 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if(manager == null)
+        {
+            manager = this;
+        }
+    }
+
+    //Draws text letter by letter. If forced, draws it all at once.
     private void ProgressText(bool force)
     {
         if(!dialogueEndReached)

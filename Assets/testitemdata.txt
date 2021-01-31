@@ -1,0 +1,6 @@
+Athletic;r;Items/athletic;muscle,2;You work out a lot and it pays off.  You're pretty good at any work that needs strength or endurance. <color="green">[Muscle +2]</color>
+Alert;r;Items/alert;wits,2;You're a sharp one and this helps you find places to hide or notice the hidden better. <color="green">[Wits +2]</color>
+Loaded;r;Items/loaded;assets,2;Even now, between jobs, you've got cash to spare and this opens doors that are otherwise barred to you. <color="green">[Assets +2]</color>
+Good Taste;r;Items/good-taste;charm,2;You dress for success and people note your good taste in personal apperance. <color="green">[Charm +2]</color>
+Enthusiastic;r;Items/enthusiastic;craft,2;Between videos on the Network and personal projects you really know your technology because of your love of it. <color="green">[Craft +2]</color>
+Keyring;c;Items/keyring;Found in Jasmine's apartment

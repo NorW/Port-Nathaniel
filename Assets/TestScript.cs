@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestScript : MonoBehaviour
 {
 
-    public GameObject canvas;
+    public GameObject dialoguePanel, mapMenuPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,14 +17,19 @@ public class TestScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.X))
         {
-            if(canvas.activeSelf)
+            if(dialoguePanel.activeSelf)
             {
-                canvas.GetComponent<DialogueManager>().CloseDialogue();
+                dialoguePanel.GetComponent<DialogueManager>().CloseDialogue();
             }
             else
             {
-                canvas.GetComponent<DialogueManager>().OpenDialogue("a");
+                dialoguePanel.GetComponent<DialogueManager>().OpenDialogue("a");
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+
         }
     }
 }

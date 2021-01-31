@@ -1,0 +1,12 @@
+a;hidden,Portraits/portrait-shadow;default,Portraits/portrait-belle
+Alex;default,Portraits/portrait-alex
+average;default,Portraits/portrait-average
+Barista;default,Portraits/portrait-barista
+Belle;default,Portraits/portrait-belle
+Jasmine;default,Portraits/portrait-jasmine
+Kyle;default,Portraits/portrait-kyle
+PNPD;default,Portraits/portrait-pnpd
+Beggar;default,Portraits/portrait-poor
+Rich Guy;default,Portraits/portrait-rich
+Robot;default,Portraits/portrait-robot
+Worker;default,Portraits/portrait-worker
