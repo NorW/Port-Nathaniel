@@ -45,9 +45,9 @@ public class CharacterData : MonoBehaviour
 
     public void AddItem(string item)
     {
-        if (item != null)
+        if (item != null && !items.itemChecker(item))   //Add item if not null and not already added.
         {
-            items.itemAdd(item);    //Add item if not null.
+            items.itemAdd(item); 
 
             var itemData = GameResourceManager.ResourceManager.GetItemData(item);   //If item has more data, check if item is a stat modifier and adjust accordingly.
             if (itemData != null)

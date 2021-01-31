@@ -99,15 +99,14 @@ public class DialogueManager : MonoBehaviour
 
     bool RollSkillChecks(Condition condition)
     {
-        int rollValue = Random.Range(1, 12);
-        if (rollValue < 6)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return false;
+    }
+
+    bool ContainsSkillChecks(Condition condition)
+    {
+        return condition.numericalParams.ContainsKey("musclecheck") || condition.numericalParams.ContainsKey("charmcheck") ||
+            condition.numericalParams.ContainsKey("witscheck") || condition.numericalParams.ContainsKey("assetscheck") ||
+            condition.numericalParams.ContainsKey("craftcheck");
     }
 
     DialogueNode SelectNextNode()
@@ -125,20 +124,34 @@ public class DialogueManager : MonoBehaviour
             //If choice can be chosen based on condition check, attempt skillcheck and return next node. Otherwise do nothing.
             if (CheckCondition(selectedNode.condition))
             {
-                bool pass = RollSkillChecks(selectedNode.condition);
-                var type = pass ? DialogueNode.DialogueType.Success : DialogueNode.DialogueType.Failure;
-                
-                if(!pass)
+                if (ContainsSkillChecks(selectedNode.condition))
                 {
-                    //TODO spirit prompt
-                }
+                    bool pass = RollSkillChecks(selectedNode.condition);
+                    var type = pass ? DialogueNode.DialogueType.Success : DialogueNode.DialogueType.Failure;
 
-                foreach(var node in selectedNode.children)
-                {
-                    if(node.Type == type && CheckCondition(node.condition))
+                    if (!pass)
                     {
-                        HandleDialogueItemChanges(node);
-                        return node;
+                        //TODO spirit prompt
+                    }
+
+                    foreach (var node in selectedNode.children)
+                    {
+                        if (node.Type == type && CheckCondition(node.condition))
+                        {
+                            nextNode = node;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach(DialogueNode node in selectedNode.children)
+                    {
+                        if(CheckCondition(node.condition))
+                        {
+                            nextNode = node;
+                            break;
+                        }
                     }
                 }
             }
@@ -176,6 +189,18 @@ public class DialogueManager : MonoBehaviour
                         currentChoice = 0;
                         break;
                 }
+            }
+            else if(currentNode.condition.numericalParams.ContainsKey("loop"))
+            {
+                DialogueNode priorChoice = currentNode;
+                for(int i = 0; i < currentNode.condition.numericalParams["loop"]; i++)
+                {
+                    do
+                    {
+                        priorChoice = priorChoice.parent;
+                    } while (priorChoice != null && priorChoice.Type != DialogueNode.DialogueType.Choice);
+                }
+                nextNode = priorChoice;
             }
         }
 
@@ -333,6 +358,12 @@ public class DialogueManager : MonoBehaviour
     {
         if(!dialogueEndReached)
         {
+            if(currentNode.Dialogue == null || currentNode.Dialogue.Length == 0)
+            {
+                dialogueEndReached = true;
+                return;
+            }
+
             var display = dialogueBox.GetComponent<TextMeshProUGUI>();
             if(force)
             {

@@ -3,6 +3,28 @@
 	</d>
 </r>
 <r owner="Belle">
+	<d owner="Belle" dialogue="choose">
+		<c owner="belle" musclecheck="1" excludedplot="faila" dialogue="a">
+			<s owner="fsdf">
+			</s>
+			<f owner="afasdf" plotgiven="faila" loop="1" dialogue="try again">
+			</f>
+		</c>
+		<c owner="belle" musclecheck="1" excludedplot="failb" dialogue="b">
+			<s owner="fsdf">
+			</s>
+			<f owner="afasdf" plotgiven="failb" loop="1" dialogue="try again">
+			</f>
+		</c>
+		<c owner="belle" musclecheck="1" excludedplot="failc" dialogue="c">
+			<s owner="fsdf">
+			</s>
+			<f owner="afasdf" plotgiven="failc" loop="1" dialogue="try again">
+			</f>
+		</c>
+		<c owner="Belle" dialogue="give up">
+		</c>
+	</d>
 	<d owner="Belle" excludedplot="first convo" dialogue="How'd the interview go, Alex?">
 		<d owner="Alex" plotgiven="first convo" dialogue="I don't think they'll be calling me back.">
 			<d owner="Belle" dialogue="I'm sorry to hear that... listen, I know it's kinda harsh to put it this way but... since you've free time could you help me with something important?">
@@ -11,10 +33,20 @@
 						<d owner="Belle" dialogue="You've always been resourceful, could you find them?">
 							<d owner="Alex" dialogue="Who will I be looking for exactly?">
 								<d owner="Belle" dialogue="Jasmine, Mary, and Kyle.  You've met them before actually.  Here, you'll know them when you see them with these pics.">
-									<d owner="Alex" dialogue="What do I need to know about Jasmine?">
-										<d owner="Belle" dialogue="She had a nasty breakup with her ex-boyfriend, Kevin, even going so far as to give him a restraining order.  I'd look into him, he's one of the loggers in town.  Here, this is her address and also she worked at Siren Coffee.">
+									<c owner="Alex" dialogue="What do I need to know about Jasmine?">
+										<d loop="1" owner="Belle" dialogue="She had a nasty breakup with her ex-boyfriend, Kevin, even going so far as to give him a restraining order.  I'd look into him, he's one of the loggers in town.  Here, this is her address and also she worked at Siren Coffee.">
 										</d>
-									</d>
+									</c>
+									<c owner="Alex" dialogue="What do I need to know about Jasmine?">
+										<d loop="1" owner="Belle" dialogue="She had a nasty breakup with her ex-boyfriend, Kevin, even going so far as to give him a restraining order.  I'd look into him, he's one of the loggers in town.  Here, this is her address and also she worked at Siren Coffee.">
+										</d>
+									</c>
+									<c owner="Alex" dialogue="What do I need to know about Jasmine?">
+										<d loop="1" owner="Belle" dialogue="She had a nasty breakup with her ex-boyfriend, Kevin, even going so far as to give him a restraining order.  I'd look into him, he's one of the loggers in town.  Here, this is her address and also she worked at Siren Coffee.">
+										</d>
+									</c>
+									<c owner="Alex" dialogue="k">
+									</c>
 								</d>
 							</d>
 						</d>

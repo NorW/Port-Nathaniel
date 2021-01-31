@@ -4,45 +4,96 @@ using UnityEngine;
 
 public class player_control : MonoBehaviour
 {
-    public static float speed = 2.5f;
+    public static float speed = 1.5f;
 
-    public Animator animator;
+    public AnimationScript animator;
+
+    PlayerInteractionBox interactionBox;
+    float interactCooldown = 0;
 
 
     // Start is called before the first frame update
     void Start()
     {
-       
+        animator = GetComponent<AnimationScript>();
+        interactionBox = GetComponentInChildren<PlayerInteractionBox>();
+        interactionBox.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateMovement()
     {
-
+        bool moving = false;
+        int newDirection = -1;
 
         if (Input.GetKey(KeyCode.A))
         {
             gameObject.transform.Translate(Vector3.left * speed * Time.deltaTime);
-            animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+            newDirection = AnimationScript.LEFT;
+            moving = true;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            gameObject.transform.Translate(Vector3.right * speed * Time.deltaTime);
+            newDirection = AnimationScript.RIGHT;
+            moving = true;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
             gameObject.transform.Translate(Vector3.down * speed * Time.deltaTime);
-            animator.SetFloat("Vertical", Input.GetAxis("Vertical"));
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            gameObject.transform.Translate(Vector3.right * speed * Time.deltaTime);
-            animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+            newDirection = AnimationScript.DOWN;
+            moving = true;
 
         }
+
         if (Input.GetKey(KeyCode.W))
         {
             gameObject.transform.Translate(Vector3.up * speed * Time.deltaTime);
-            animator.SetFloat("Vertical", Input.GetAxis("Vertical"));
+            newDirection = AnimationScript.UP;
+            moving = true;
+
         }
 
+        if (!moving)
+        {
+            animator.StopWalk();
+        }
+        if (newDirection != -1)
+        {
+            animator.StartWalk(newDirection);
+        }
+    }
+
+    void HandleInteraction()
+    {
+        if (interactCooldown > 0)
+        {
+            interactCooldown -= Time.deltaTime;
+            if (interactCooldown <= 0)
+            {
+                interactionBox.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                interactCooldown = 0.2f;
+                interactionBox.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(!DialogueManager.manager.gameObject.activeSelf)
+        {
+            UpdateMovement();
+            HandleInteraction();
+        }
+       
 
         // if(Input.GetKey(KeyCode.M)){
         // OpenMap();

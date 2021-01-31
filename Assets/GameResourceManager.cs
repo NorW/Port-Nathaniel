@@ -17,7 +17,7 @@ public class Condition
                                                                     "musclemod", "charmmod", "witsmod", "assetsmod", "craftmod",
                                                                     "healthcheck", "fortitudecheck", "spiritcheck",
                                                                     "healthmod", "fortitudemod", "spiritmod",
-                                                                    "starttime", "endtime"};
+                                                                    "starttime", "endtime", "loop"};
 
     public Dictionary<string, List<string>> objectAndPlotValues;
 

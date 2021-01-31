@@ -17,14 +17,7 @@ public class TestScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.X))
         {
-            if(dialoguePanel.activeSelf)
-            {
-                dialoguePanel.GetComponent<DialogueManager>().CloseDialogue();
-            }
-            else
-            {
-                dialoguePanel.GetComponent<DialogueManager>().OpenDialogue("a");
-            }
+            
         }
 
         if(Input.GetKeyDown(KeyCode.M))
