@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDatabase : MonoBehaviour
+public class ItemDatabase
 {
     public List<string> items = new List<string>();//create the list
-
-    
 
     public void itemAdd(string itemName)
     {

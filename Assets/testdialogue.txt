@@ -1,26 +1,30 @@
 <r owner="a">
-	<d owner="a" dialogue="text 1">
-		<d owner="a" dialogue="text 2asdfsadfsdfsdfsfsafsdf">
-			<d owner="fssdf" dialogue="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.">
-				<c dialogue="break in">
-					<s dialogue="door broken">
-					</s>
-					<f dialogue="shoulder broken">
-					</f>
-				</c>
-				<c dialogue="break out">
-					<s dialogue="door broken">
-					</s>
-					<f dialogue="ankle broken">
-					</f>
-				</c>
-				<c dialogue="do a backflip">
-					<s dialogue="door broken">
-					</s>
-					<f dialogue="legs broken">
-					</f>
-				</c>
+	<d owner="a" excludedplot="first convo" dialogue="How'd the interview go, Alex?">
+	</d>
+</r>
+<r owner="Belle">
+	<d owner="Belle" excludedplot="first convo" dialogue="How'd the interview go, Alex?">
+		<d owner="Alex" plotgiven="first convo" dialogue="I don't think they'll be calling me back.">
+			<d owner="Belle" dialogue="I'm sorry to hear that... listen, I know it's kinda harsh to put it this way but... since you've free time could you help me with something important?">
+				<d owner="Alex" dialogue="Sure, what's wrong?">
+					<d owner="Belle" dialogue="It's my friends.  They've been missing a week now and the police have been dragging their feet finding them.">
+						<d owner="Belle" dialogue="You've always been resourceful, could you find them?">
+							<d owner="Alex" dialogue="Who will I be looking for exactly?">
+								<d owner="Belle" dialogue="Jasmine, Mary, and Kyle.  You've met them before actually.  Here, you'll know them when you see them with these pics.">
+									<d owner="Alex" dialogue="What do I need to know about Jasmine?">
+										<d owner="Belle" dialogue="She had a nasty breakup with her ex-boyfriend, Kevin, even going so far as to give him a restraining order.  I'd look into him, he's one of the loggers in town.  Here, this is her address and also she worked at Siren Coffee.">
+										</d>
+									</d>
+								</d>
+							</d>
+						</d>
+					</d>
+				</d>
 			</d>
+		</d>
+	</d>
+	<d owner="Belle" dialogue="Hello, Alex, find anything out yet?">
+		<d owner="Alex" dialogue="Nothing new, not yet anyway.">
 		</d>
 	</d>
 </r>
