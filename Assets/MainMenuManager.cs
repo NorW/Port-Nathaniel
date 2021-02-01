@@ -30,6 +30,7 @@ public class MainMenuManager : MonoBehaviour
         loadMenuPanel.SetActive(false);
         characterCreatePanel.SetActive(false);
         mainMenuPanel.SetActive(true);
+        MapMenuManager.manager.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

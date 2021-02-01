@@ -3,15 +3,60 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MapMenuManager : MonoBehaviour
 {
+    public static MapMenuManager manager = null;
 
     public GameObject background, characterStatPanel, plotInfoPanel, mapInterfacePanel, infoTextPanel;
+
+    public PlotItemHandler[] plotItems = new PlotItemHandler[10];
+
+    public Texture2D itemIco;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(manager == null)
+        {
+            manager = this;
+        }
+    }
+
+    public void AddItem(string name)
+    {
+        if(name == null)
+        {
+            return;
+        }
+        if(GameResourceManager.ResourceManager.GetItemData(name) == null)
+        {
+            return;
+        }
+        var data = GameResourceManager.ResourceManager.GetItemData(name);
+        foreach (var obj in plotItems)
+        {
+            if(!obj.gameObject.activeSelf)
+            {
+                obj.name = name;
+                obj.description = data.description;
+                obj.gameObject.GetComponent<Image>().sprite = Sprite.Create(itemIco, new Rect(0, 0, itemIco.width, itemIco.height), new Vector2(0.5f, 0.5f));
+                obj.gameObject.SetActive(true);
+                break;
+            }
+        }
+    }
+
+    public void OpenMenu()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void CloseMenu()
+    {
+        infoTextPanel.GetComponent<InfoTextMover>().HideBox();
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,6 +81,10 @@ public class MapMenuManager : MonoBehaviour
                         found = true;
                         break;
                     }
+                }
+                else if(hit.gameObject.layer == 9)
+                {
+                    
                 }
             }
         }

@@ -85,13 +85,39 @@ public class player_control : MonoBehaviour
         }
     }
 
+    private void UpdateMap()
+    {
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            if(MapMenuManager.manager.gameObject.activeSelf)
+            {
+                MapMenuManager.manager.CloseMenu();
+            }
+            else
+            {
+                MapMenuManager.manager.OpenMenu();
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         if(!DialogueManager.manager.gameObject.activeSelf)
         {
-            UpdateMovement();
-            HandleInteraction();
+            if (!MapMenuManager.manager.gameObject.activeSelf)
+            {
+                UpdateMovement();
+                HandleInteraction();
+                if (!DialogueManager.manager.gameObject.activeSelf)
+                {
+                    UpdateMap();
+                }
+            }
+            else
+            {
+                UpdateMap();
+            }
         }
        
 

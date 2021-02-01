@@ -1,6 +1,15 @@
-Athletic;r;Items/athletic;muscle,2;You work out a lot and it pays off.  You're pretty good at any work that needs strength or endurance. <color="green">[Muscle +2]</color>
-Alert;r;Items/alert;wits,2;You're a sharp one and this helps you find places to hide or notice the hidden better. <color="green">[Wits +2]</color>
-Loaded;r;Items/loaded;assets,2;Even now, between jobs, you've got cash to spare and this opens doors that are otherwise barred to you. <color="green">[Assets +2]</color>
-Good Taste;r;Items/good-taste;charm,2;You dress for success and people note your good taste in personal apperance. <color="green">[Charm +2]</color>
-Enthusiastic;r;Items/enthusiastic;craft,2;Between videos on the Network and personal projects you really know your technology because of your love of it. <color="green">[Craft +2]</color>
+Athletic;r;Items/perkIcon_flex;muscle,2;You work out a lot and it pays off.  You're pretty good at any work that needs strength or endurance. <color="green">[Muscle +2]</color>
+Alert;r;Items/perkIcon_attention;wits,2;You're a sharp one and this helps you find places to hide or notice the hidden better. <color="green">[Wits +2]</color>
+Loaded;r;Items/perkIcon_money;assets,2;Even now, between jobs, you've got cash to spare and this opens doors that are otherwise barred to you. <color="green">[Assets +2]</color>
+Good Taste;r;Items/perkIcon_thumbsup;charm,2;You dress for success and people note your good taste in personal apperance. <color="green">[Charm +2]</color>
+Enthusiastic;r;Items/perkIcon_heart;craft,2;Between videos on the Network and personal projects you really know your technology because of your love of it. <color="green">[Craft +2]</color>
 Keyring;c;Items/keyring;Found in Jasmine's apartment
+Note:  Jackson;c;Items/magnifyingGlassIcon;A detective with PNPD named Jackson was name dropped by Kevin.  Perhaps I should look into this detective for more leads.
+Note:  Court Order;c;Items/magnifyingGlassIcon;Kevin has a history of threatening violence against Jasmine before their breakup.  He has a restraining order against him from her.
+Note:  Logging Auto;c;Items/magnifyingGlassIconThere was mention of an Automatic record at the logging grounds giving Kevin an alibi at the time of Jasmine's vanishing.  Something worth looking into.
+Note:  Drunken Anger;c;Items/magnifyingGlassIconKevin has a temper when he gets drunk, which is often, this is a good lead to follow.
+Note:  The Cabin;c;Items/magnifyingGlassIconThere's mention of Kevin owning or having access to a cabin in the woods.  I suspect one of the summer cabins near the logging grounds but I I don't know which one.
+Note:  Faked Record;c;Items/magnifyingGlassIconThe Automatic records in the lumber yard have been clearly tampered with, and only with Kevin's record, I've kept a copy of the proof of this.
+Note:  James Smith;c;Items/magnifyingGlassIconI've found a connection between Kevin and someone named James Smith.  I'm not sure who that is but my guess is family connection or a fake name.
+Note:  Kevin's Taste;c;Items/magnifyingGlassIconKevin sure has expensive taste in booze, and extremely perticular too.  This might come up later.
+Note:  Cabin Fake;c;Items/magnifyingGlassIconJames Smith is in fact a fake name that Kevin owns the cabin in the woods under.  It is the one on the far right.

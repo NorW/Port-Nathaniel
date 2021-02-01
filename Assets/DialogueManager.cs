@@ -99,7 +99,34 @@ public class DialogueManager : MonoBehaviour
 
     bool RollSkillChecks(Condition condition)
     {
-        return false;
+        int mod = Random.Range(1, 12);
+        if(condition.numericalParams.ContainsKey("musclecheck"))
+        {
+            mod += (int) CharacterData.Data.GetCharacterStats().Muscle.Value;
+            return mod >= 7;
+        }
+        else if(condition.numericalParams.ContainsKey("witscheck"))
+        {
+            mod += (int)CharacterData.Data.GetCharacterStats().Wits.Value;
+            return mod >= 7;
+        }
+        else if (condition.numericalParams.ContainsKey("charmcheck"))
+        {
+            mod += (int)CharacterData.Data.GetCharacterStats().Charm.Value;
+            return mod >= 7;
+        }
+        else if (condition.numericalParams.ContainsKey("assetscheck"))
+        {
+            mod += (int)CharacterData.Data.GetCharacterStats().Assets.Value;
+            return mod >= 7;
+        }
+        else if (condition.numericalParams.ContainsKey("craftcheck"))
+        {
+            mod += (int)CharacterData.Data.GetCharacterStats().Craft.Value;
+            return mod >= 7;
+        }
+
+        return true;
     }
 
     bool ContainsSkillChecks(Condition condition)
@@ -218,6 +245,10 @@ public class DialogueManager : MonoBehaviour
                 foreach(var item in node.condition.objectAndPlotValues["itemgiven"])
                 {
                     CharacterData.Data.AddItem(item);
+                    if(GameResourceManager.ResourceManager.GetItemData(item) != null)
+                    {
+                        MapMenuManager.manager.AddItem(item);
+                    }
                 }
             }
 
@@ -234,6 +265,10 @@ public class DialogueManager : MonoBehaviour
                 foreach (var item in node.condition.objectAndPlotValues["plotgiven"])
                 {
                     CharacterData.Data.AddItem(item);
+                    if (GameResourceManager.ResourceManager.GetItemData(item) != null)
+                    {
+                        MapMenuManager.manager.AddItem(item);
+                    }
                 }
             }
 

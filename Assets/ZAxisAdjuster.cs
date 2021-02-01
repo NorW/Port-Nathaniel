@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ZAxisAdjuster : MonoBehaviour
 {
-    public GameObject map;
+    
 
     // Update is called once per frame
     void Update()
