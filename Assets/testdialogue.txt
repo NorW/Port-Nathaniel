@@ -15,15 +15,11 @@
 										<d loop="1" owner="Belle" dialogue="She had a nasty breakup with her ex-boyfriend, Kevin, even going so far as to give him a restraining order.  I'd look into him, he's one of the loggers in town.  Here, this is her address and also she worked at Siren Coffee.">
 										</d>
 									</c>
-									<c owner="Alex" dialogue="What do I need to know about Jasmine?">
-										<d loop="1" owner="Belle" dialogue="She had a nasty breakup with her ex-boyfriend, Kevin, even going so far as to give him a restraining order.  I'd look into him, he's one of the loggers in town.  Here, this is her address and also she worked at Siren Coffee.">
+									<c owner="Alex" dialogue="What do I need to know about Kyle?">
+										<d loop="1" owner="Belle" dialogue="He's been in trouble with the law before, not prison time but a few months in jail.  I'm honestly not sure where to look.  He went to church often, you should check it down the street for a lead.">
 										</d>
 									</c>
-									<c owner="Alex" dialogue="What do I need to know about Jasmine?">
-										<d loop="1" owner="Belle" dialogue="She had a nasty breakup with her ex-boyfriend, Kevin, even going so far as to give him a restraining order.  I'd look into him, he's one of the loggers in town.  Here, this is her address and also she worked at Siren Coffee.">
-										</d>
-									</c>
-									<c owner="Alex" dialogue="Ok">
+									<c owner="Alex" dialogue="I'll get back to looking into things.">
 									</c>
 								</d>
 							</d>
@@ -33,8 +29,116 @@
 			</d>
 		</d>
 	</d>
-	<d owner="Belle" dialogue="Hello, Alex, find anything out yet?">
-		<d owner="Alex" dialogue="Nothing new, not yet anyway.">
+	<d owner="Belle" excludedplot="Jasmine found" plotreq="Jasmine free" dialogue="Alex!  Thank you so much for finding Jasmine!  I'm not letting her out of my sight for the next week.">
+		<c owner="Alex" plotgiven="Jasmine found" dialogue="What do I need to know about Kyle?">
+			<d loop="1" owner="Belle" dialogue="He's been in trouble with the law before, not prison time but a few months in jail.  I'm honestly not sure where to look.  He went to church often, you should check it down the street for a lead.">
+			</d>
+		</c>
+		<c owner="Alex" dialogue="I'll get back to looking into things.">
+		</c>
+	</d>
+	<d owner="Belle" excludedplot="Kyle found" plotreq="Kyle free" dialogue="Alex!  Thank you so much for finding Jasmine!  I'm not letting her out of my sight for the next week.">
+		<c owner="Alex" dialogue="What do I need to know about Jasmine?">
+			<d loop="1" owner="Belle" dialogue="She had a nasty breakup with her ex-boyfriend, Kevin, even going so far as to give him a restraining order.  I'd look into him, he's one of the loggers in town.  Here, this is her address and also she worked at Siren Coffee.">
+			</d>
+		</c>
+		<c owner="Alex" dialogue="I'll get back to looking into things.">
+		</c>
+	</d>
+	<d owner="Belle" excludedplot="Jasmine found,Kyle found" dialogue="Hello, Alex, find anything out yet?">
+		<c owner="Alex" dialogue="What do I need to know about Jasmine?">
+			<d loop="1" owner="Belle" dialogue="She had a nasty breakup with her ex-boyfriend, Kevin, even going so far as to give him a restraining order.  I'd look into him, he's one of the loggers in town.  Here, this is her address and also she worked at Siren Coffee.">
+			</d>
+		</c>
+		<c owner="Alex" dialogue="What do I need to know about Kyle?">
+			<d loop="1" owner="Belle" dialogue="He's been in trouble with the law before, not prison time but a few months in jail.  I'm honestly not sure where to look.  He went to church often, you should check it down the street for a lead.">
+			</d>
+		</c>
+		<c owner="Alex" dialogue="I'll get back to looking into things.">
+		</c>
+	</d>
+	<d owner="Belle" excludedplot="Jasmine found" dialogue="Hello, Alex, find anything out yet?">
+		<c owner="Alex" dialogue="What do I need to know about Jasmine?">
+			<d loop="1" owner="Belle" dialogue="She had a nasty breakup with her ex-boyfriend, Kevin, even going so far as to give him a restraining order.  I'd look into him, he's one of the loggers in town.  Here, this is her address and also she worked at Siren Coffee.">
+			</d>
+		</c>
+		<c owner="Alex" dialogue="I'll get back to looking into things.">
+		</c>
+	</d>
+	<d owner="Belle" excludedplot="Kyle found" dialogue="Hello, Alex, find anything out yet?">
+		<c owner="Alex" dialogue="What do I need to know about Kyle?">
+			<d loop="1" owner="Belle" dialogue="He's been in trouble with the law before, not prison time but a few months in jail.  I'm honestly not sure where to look.  He went to church often, you should check it down the street for a lead.">
+			</d>
+		</c>
+		<c owner="Alex" dialogue="I'll get back to looking into things.">
+		</c>
+	</d>
+</r>
+<r owner="Detective Jackson">
+	<d owner="Detective Jackson" dialogue="Yes?">
+		<c owner="Alex" excludedplot="Note:  Jackson" dialogue="Detective Jackson, could I talk to you about a missing person's case?">
+			<d owner="Detective Jackson" dialogue="There's only one ongoing case I've been assigned to so I'm assuming you mean Jasmine.  I'm a bit busy at the moment with that and don't really need to stop everything for you.">
+				<c owner="Alex" assetscheck="1" dialogue="[Assets] Detective, this is a good chance to reach out to the community and rebuild public trust.">
+					<s owner="Detective Jackson" owner="Detective Jackson" dialogue="[Success] I suppose you're right, the boss would look good on that sort of trust building.  Alright, what do you want to know?">
+						<d owner="Alex" dialogue="Have you made any notable progress this last week?">
+							<d owner="Detective Jackson" dialogue="I'm afraid not, no.  The ex-boyfriend has a reliable aliby from his work place Auto's records and his trailer was searched for evidence, none of which was-- wait a minute...">
+								<d owner="Detective Jackson" plotgiven="Note:  Logging Auto" dialogue="Why am I telling you any of this?  Crap, boss is gonna get on my butt for just telling a random civilian this information.  I need to get back to work.">
+								</d>
+							</d>
+						</d>
+					</s>
+					<f owner="Detective Jackson" loop="1" dialogue="[Failure] Public Relations are not my job, my job is finding a kidnapper or killer, which I need to get back to.">
+					</f>
+				</c>
+				<c owner="Alex" charmcheck="1" dialogue="[Charm] I won't take too much of your time, I promise, I just would like to bring any news I can back to my friend to help her feel better.">
+					<s owner="Detective Jackson" dialogue="[Success] Sure, if it'll get her off my case for a bit longer.  What do you need to know?">
+						<d owner="Alex" dialogue="Have you made any notable progress this last week?">
+							<d owner="Detective Jackson" dialogue="I'm afraid not, no.  The ex-boyfriend has a reliable aliby from his work place Auto's records and his trailer was searched for evidence, none of which was-- wait a minute...">
+								<d owner="Detective Jackson" plotgiven="Note:  Logging Auto" dialogue="Why am I telling you any of this?  Crap, boss is gonna get on my butt for just telling a random civilian this information.  I need to get back to work.">
+								</d>
+							</d>
+						</d>
+					</s>
+					<f owner="Detective Jackson" loop="1" dialogue="[Failure] Your friend is just going to have to be patient, I'm sorry, now I need to return to the exact case you're delaying.">
+					</f>
+				</c>
+				<c owner="Alex" witscheck="1" dialogue="[Wits] Of course, I understand, I'll get out of your hair. [Make a sly glance over his shoulder at the file in his hand]">
+					<s owner="Detective Jackson" dialogue="[Success] [You see mention of the logs of an Auto from the logging grounds reporting Kevin's time and location, giving him an alibi.]">
+						<d owner="Alex" dialogue="Have you made any notable progress this last week?">
+							<d owner="Detective Jackson" dialogue="I'm afraid not, no.  The ex-boyfriend has a reliable aliby from his work place Auto's records and his trailer was searched for evidence, none of which was-- wait a minute...">
+								<d owner="Detective Jackson" plotgiven="Note:  Logging Auto" dialogue="Why am I telling you any of this?  Crap, boss is gonna get on my butt for just telling a random civilian this information.  I need to get back to work.">
+								</d>
+							</d>
+						</d>
+					</s>
+					<f owner="Detective Jackson" loop="1" dialogue="[Failure] Hey! Get out before I lock you up for obstruction!">
+					</f>
+				</c>
+				<c owner="Alex" dialogue="Nevermind.">
+				</c>
+			</d>
+		</c>
+		<c owner="Alex" dialogue="Nothing, nevermind me.">
+		</c>
+	</d>
+</r>
+<r owner="Mila">
+	<d owner="Mila" excludedplot="Mila first" dialogue="Sorry, I'm on break, you'll want someone inside for coffee.">
+		<d owner="Alex" dialogue="Actually, I'm looking into Jasmine's vanishing act if you've a moment.">
+			<d owner="Mila" dialogue="Oh!  Yeah, sure.  What do you need from me?">
+				<d owner="Alex" dialogue="I've been told her and her ex didn't get along well, did she mention that to you?">
+					<d owner="Mila" plotgiven="Note: Drunken Rage" dialogue="Yeah.  He was a drunk, and a mean one too, when he got drunk he'd threaten to hurt her, and others.  At first she told him he couldn't drink at their place, then later she got a restraining order when things got nasty.">
+						<d owner="Alex" witscheck="1" dialogue="[Wits] If he couldn't drink at their place, but still got drunk, where'd he do his drinking?">
+							<s owner="Mila" dialogue="[Success] Good question.  Hmm.  You know I remember Jasmine mentioning something about a cabin before?  Maybe something like that.">
+							</s>
+							<f owner="Mila" dialogue="[Failure]  Good question.  I'm afraid I don't know.">
+							</f>
+						</d>
+					</d>
+				</d>
+			</d>
 		</d>
+	</d>
+	<d owner="Mila" dialogue="Good luck on your search">
 	</d>
 </r>

@@ -6,10 +6,10 @@ Enthusiastic;r;Items/perkIcon_heart;craft,2;Between videos on the Network and pe
 Keyring;c;Items/keyring;Found in Jasmine's apartment
 Note:  Jackson;c;Items/magnifyingGlassIcon;A detective with PNPD named Jackson was name dropped by Kevin.  Perhaps I should look into this detective for more leads.
 Note:  Court Order;c;Items/magnifyingGlassIcon;Kevin has a history of threatening violence against Jasmine before their breakup.  He has a restraining order against him from her.
-Note:  Logging Auto;c;Items/magnifyingGlassIconThere was mention of an Automatic record at the logging grounds giving Kevin an alibi at the time of Jasmine's vanishing.  Something worth looking into.
-Note:  Drunken Anger;c;Items/magnifyingGlassIconKevin has a temper when he gets drunk, which is often, this is a good lead to follow.
-Note:  The Cabin;c;Items/magnifyingGlassIconThere's mention of Kevin owning or having access to a cabin in the woods.  I suspect one of the summer cabins near the logging grounds but I I don't know which one.
-Note:  Faked Record;c;Items/magnifyingGlassIconThe Automatic records in the lumber yard have been clearly tampered with, and only with Kevin's record, I've kept a copy of the proof of this.
-Note:  James Smith;c;Items/magnifyingGlassIconI've found a connection between Kevin and someone named James Smith.  I'm not sure who that is but my guess is family connection or a fake name.
-Note:  Kevin's Taste;c;Items/magnifyingGlassIconKevin sure has expensive taste in booze, and extremely perticular too.  This might come up later.
-Note:  Cabin Fake;c;Items/magnifyingGlassIconJames Smith is in fact a fake name that Kevin owns the cabin in the woods under.  It is the one on the far right.
+Note:  Logging Auto;c;Items/magnifyingGlassIcon;There was mention of an Automatic record at the logging grounds giving Kevin an alibi at the time of Jasmine's vanishing.  Something worth looking into.
+Note:  Drunken Anger;c;Items/magnifyingGlassIcon;Kevin has a temper when he gets drunk, which is often, this is a good lead to follow.
+Note:  The Cabin;c;Items/magnifyingGlassIcon;There's mention of Kevin owning or having access to a cabin in the woods.  I suspect one of the summer cabins near the logging grounds but I I don't know which one.
+Note:  Faked Record;c;Items/magnifyingGlassIcon;The Automatic records in the lumber yard have been clearly tampered with, and only with Kevin's record, I've kept a copy of the proof of this.
+Note:  James Smith;c;Items/magnifyingGlassIcon;I've found a connection between Kevin and someone named James Smith.  I'm not sure who that is but my guess is family connection or a fake name.
+Note:  Kevin's Taste;c;Items/magnifyingGlassIcon;Kevin sure has expensive taste in booze, and extremely perticular too.  This might come up later.
+Note:  Cabin Fake;c;Items/magnifyingGlassIcon;James Smith is in fact a fake name that Kevin owns the cabin in the woods under.  It is the one on the far right.

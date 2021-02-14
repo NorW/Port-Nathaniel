@@ -39,7 +39,7 @@ public class MapMenuManager : MonoBehaviour
         {
             if(!obj.gameObject.activeSelf)
             {
-                obj.name = name;
+                obj.plotItemName = name;
                 obj.description = data.description;
                 obj.gameObject.GetComponent<Image>().sprite = Sprite.Create(itemIco, new Rect(0, 0, itemIco.width, itemIco.height), new Vector2(0.5f, 0.5f));
                 obj.gameObject.SetActive(true);
